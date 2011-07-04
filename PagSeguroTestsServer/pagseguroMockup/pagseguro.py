@@ -43,10 +43,10 @@ def get(k,d,v):
   if k in d: return ''.join(d[k])
   return v
 
-def process(path,data):
+def process(path,data,headers):
   '''Imita o PagSeguro'''
-  global retornourl
-  url=retornourl
+  localhost= headers['referer'][:-20]
+  url= localhost + "/cart/pagseguro/complete"
   if path.lower()=='/security/webpagamentos/webpagto.aspx':
     titulo='Pagamento processado.'
     dump='\n'.join(sorted(['%s="%s"' % (k,'","'.join(v)) for k,v in data.iteritems()]))
